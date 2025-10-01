@@ -1,4 +1,4 @@
-# NGINX-Projects (AWS • Ubuntu 22.04)
+# NGINX-Projects (AWS)
 
 Small, copy‑pasteable NGINX setups for EC2.
 
