@@ -1,0 +1,28 @@
+# /etc/nginx/sites-available/default
+
+# 1) HTTP: redirect all requests to HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name __HOST__;
+
+    return 301 https://$host$request_uri;
+}
+
+# 2) HTTPS: serve site with self-signed cert
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name __HOST__;
+
+    ssl_certificate     /etc/ssl/selfsigned/__HOST__.crt;
+    ssl_certificate_key /etc/ssl/selfsigned/__HOST__.key;
+
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:10m;
+    # Optional hardening:
+    # ssl_protocols TLSv1.2 TLSv1.3;
+
+    root /var/www/html;
+    index index.html;
+}
